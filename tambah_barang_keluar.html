@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tambah Barang Keluar</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+        font-family: sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+    }
+
+    .sidebar {
+        width: 80px; 
+        background-color: #101540;
+        color: white;
+        position: fixed;
+        height: 100%;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sidebar .logo {
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .sidebar ul.nav {
+    width: 100%;
+    padding-left: 0;
+    margin: 0;
+    }
+
+    .sidebar .nav-item {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px; 
+    }
+
+    .sidebar .nav-link {
+        color: white;
+        padding: 8px 0; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 11px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .sidebar .nav-link i {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    .sidebar .logout-wrapper {
+        margin-top: auto;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+
+    .content {
+        margin-left: 80px; 
+        padding: 20px;
+    }
+
+    .navbar-top {
+        background-color: white;
+        padding: 15px 20px;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .navbar-top .user-icon {
+        font-size: 1.5rem;
+        margin-right: 10px;
+    }
+
+    .dashboard-cards .card {
+        background-color: #87ceeb;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-cards .card h5 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-cards .card .number {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+
+    .table-responsive {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .pagination-container .pagination-info {
+        margin-right: auto;
+    }
+    .sidebar .logo {
+    margin-bottom: 0; 
+    }
+  </style>
+</head>
+<body>
+
+ <div class="sidebar">
+    <div>
+      <img src="assets/oase logo 1.png" alt="OASE Logo" class="img-fluid logo">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="data_produk.html"><i class="fas fa-box"></i> Data Produk</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="barang_masuk.html"><i class="fas fa-shopping-basket"></i> Barang Masuk</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="barang_keluar.html"><i class="fas fa-truck-loading"></i> Barang Keluar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="retur.html"><i class="fas fa-exchange-alt"></i> Retur</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="kategori.html"><i class="fas fa-tags"></i> Kategori</a>
+        </li>
+      </ul>
+    </div>
+    <div class="logout-wrapper">
+      <a class="nav-link" href="login.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i>Logout</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="navbar-top">
+      <a href="ubah_admin.html" class="d-flex align-items-center text-decoration-none text-dark px-3">
+        <i class="fas fa-user user-icon"></i>
+        <span>user</span>
+      </a>
+    </div>
+
+    <div class="form-container">
+      <div class="d-flex justify-content-between align-items-center px-1 pb-3">
+        <h4>Tambah Barang Keluar</h4>
+      </div>
+
+      <form id="formBarangKeluar">
+        <div class="mb-3 row">
+          <label for="namaProduk" class="col-sm-3 col-form-label">Nama Produk</label>
+          <div class="col-sm-6">
+            <select class="form-select" id="namaProduk" required>
+              <option selected disabled value="">Pilih Produk</option>
+              <option>Beng-beng</option>
+              <option>Indomie</option>
+              <option>Teh Botol</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="tanggalKeluar" class="col-sm-3 col-form-label">Tanggal Keluar</label>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" id="tanggalKeluar" required>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="supplier" class="col-sm-3 col-form-label">Supplier</label>
+          <div class="col-sm-6">
+            <select class="form-select" id="supplier" required>
+              <option selected disabled value="">Pilih Supplier</option>
+              <option>PT. Halo</option>
+              <option>PT. Makmur</option>
+              <option>PT. Selalu Jaya</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="admin" class="col-sm-3 col-form-label">Admin</label>
+          <div class="col-sm-6">
+            <select class="form-select" id="admin" required>
+              <option selected disabled value="">Pilih Admin</option>
+              <option>Yanto</option>
+              <option>Budi</option>
+              <option>Sinta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="jumlah" class="col-sm-3 col-form-label">Jumlah Keluar</label>
+          <div class="col-sm-6">
+            <input type="number" class="form-control" id="jumlah" placeholder="Masukkan jumlah barang keluar" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-9 text-end">
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("formBarangKeluar").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const namaProduk = document.getElementById("namaProduk").value;
+      const tanggalKeluar = document.getElementById("tanggalKeluar").value;
+      const supplier = document.getElementById("supplier").value;
+      const admin = document.getElementById("admin").value;
+      const jumlah = document.getElementById("jumlah").value;
+
+      if (!namaProduk || !tanggalKeluar || !supplier || !admin || !jumlah) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Semua kolom wajib diisi!',
+          confirmButtonColor: '#d33'
+        });
+        return;
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Data Berhasil Ditambah',
+        confirmButtonColor: '#397BB9',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = 'barang_keluar.html';
+        }
+      });
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil',
+        text: 'Berhasil Logout!',
+        confirmButtonColor: '#397BB9',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
